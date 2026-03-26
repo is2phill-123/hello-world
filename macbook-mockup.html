@@ -12,135 +12,286 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+    background: linear-gradient(160deg, #0a0a12 0%, #111128 40%, #0d1b2a 100%);
     font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
-    padding: 40px 20px;
+    padding: 60px 20px;
+    overflow-x: hidden;
+  }
+
+  .macbook-wrapper {
+    perspective: 1200px;
+    width: 960px;
+    max-width: 96vw;
   }
 
   .macbook {
-    width: 900px;
-    max-width: 95vw;
+    transform: rotateX(2deg);
+    transform-origin: bottom center;
   }
 
-  /* Screen bezel */
-  .screen {
-    background: #0a0a0a;
-    border-radius: 16px 16px 0 0;
-    padding: 20px 20px 0 20px;
+  /* ============ SCREEN / LID ============ */
+  .lid {
+    background: linear-gradient(
+      180deg,
+      #d4d4d8 0%,
+      #c8c8cc 2%,
+      #b8b8bc 4%,
+      #a8a8ac 50%,
+      #b0b0b4 96%,
+      #c0c0c4 98%,
+      #888 100%
+    );
+    border-radius: 14px 14px 0 0;
+    padding: 14px 14px 0 14px;
     position: relative;
     box-shadow:
-      0 -2px 20px rgba(0,0,0,0.5),
-      inset 0 1px 0 rgba(255,255,255,0.05);
+      0 -1px 3px rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.6),
+      inset 0 -1px 0 rgba(0,0,0,0.1);
   }
 
-  /* Camera notch */
-  .notch {
+  /* Chrome edge highlight on lid */
+  .lid::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0) 5%,
+      rgba(255,255,255,0.7) 30%,
+      rgba(255,255,255,0.9) 50%,
+      rgba(255,255,255,0.7) 70%,
+      rgba(255,255,255,0) 95%
+    );
+    border-radius: 14px 14px 0 0;
+  }
+
+  /* Camera */
+  .camera {
     width: 8px;
     height: 8px;
-    background: radial-gradient(circle, #1a1a1a 40%, #0d0d0d 60%);
+    background: radial-gradient(circle, #2a2a2e 30%, #1a1a1e 60%, #0a0a0e 100%);
     border-radius: 50%;
-    margin: 0 auto 12px;
+    margin: 0 auto 10px;
+    box-shadow: 0 0 0 1.5px #8a8a8e, 0 0 3px rgba(0,0,0,0.3);
     position: relative;
-    box-shadow: 0 0 0 1.5px #1f1f1f;
   }
 
-  .notch::after {
+  .camera::after {
     content: '';
-    width: 3px;
-    height: 3px;
-    background: radial-gradient(circle, #2a4a3a 0%, #1a2a20 100%);
+    width: 3px; height: 3px;
+    background: radial-gradient(circle, #1a3a2a 0%, #0a1a10 100%);
     border-radius: 50%;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; left: 50%;
     transform: translate(-50%, -50%);
   }
 
-  /* Screen content area */
-  .screen-content {
-    background: #1a1209;
-    border-radius: 6px 6px 0 0;
+  /* Display area */
+  .display {
+    background: #000;
+    border-radius: 4px 4px 0 0;
     overflow: hidden;
     aspect-ratio: 16 / 10;
     position: relative;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.5);
   }
 
-  .screen-content img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* Screen glare effect */
-  .screen-content::after {
+  /* Screen glare */
+  .display::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     background: linear-gradient(
-      115deg,
-      rgba(255,255,255,0.03) 0%,
-      rgba(255,255,255,0) 40%,
-      rgba(255,255,255,0) 60%,
-      rgba(255,255,255,0.01) 100%
+      125deg,
+      rgba(255,255,255,0.04) 0%,
+      rgba(255,255,255,0.01) 30%,
+      transparent 50%,
+      transparent 100%
     );
     pointer-events: none;
+    z-index: 10;
   }
 
-  /* Bottom chin / hinge area */
-  .bottom-bar {
-    background: linear-gradient(to bottom, #0a0a0a, #111111);
-    height: 14px;
-    border-radius: 0 0 0 0;
+  /* ============ HINGE ============ */
+  .hinge-area {
+    height: 8px;
+    background: linear-gradient(
+      to bottom,
+      #707074 0%,
+      #b0b0b4 30%,
+      #d0d0d4 50%,
+      #a0a0a4 70%,
+      #808084 100%
+    );
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.4);
     position: relative;
   }
 
-  /* Keyboard base */
+  /* ============ KEYBOARD BASE ============ */
   .base {
-    background: linear-gradient(to bottom, #2a2a2a 0%, #1e1e1e 10%, #1c1c1c 90%, #151515 100%);
-    height: 14px;
-    border-radius: 0 0 16px 16px;
+    background: linear-gradient(
+      180deg,
+      #c8c8cc 0%,
+      #d0d0d4 3%,
+      #d8d8dc 10%,
+      #d4d4d8 50%,
+      #ccccce 90%,
+      #c0c0c4 97%,
+      #b0b0b4 100%
+    );
+    border-radius: 0 0 14px 14px;
+    padding: 18px 28px 14px;
     position: relative;
     box-shadow:
-      0 4px 15px rgba(0,0,0,0.5),
-      0 2px 4px rgba(0,0,0,0.3);
+      0 6px 25px rgba(0,0,0,0.4),
+      0 2px 8px rgba(0,0,0,0.2),
+      inset 0 -1px 0 rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.3);
   }
 
-  /* Trackpad dip / front edge */
-  .base::before {
+  /* Chrome edge on base bottom */
+  .base::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 18%;
-    height: 4px;
-    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.15));
-    border-radius: 0 0 4px 4px;
+    bottom: 0; left: 30px; right: 30px;
+    height: 2px;
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.5) 30%,
+      rgba(255,255,255,0.7) 50%,
+      rgba(255,255,255,0.5) 70%,
+      rgba(255,255,255,0) 100%
+    );
+    border-radius: 0 0 14px 14px;
   }
 
-  /* Hinge shadow */
-  .hinge {
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
-    border-radius: 0;
+  /* ============ KEYBOARD ============ */
+  .keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 16px;
   }
 
-  /* Subtle reflection under laptop */
-  .reflection {
-    width: 80%;
-    height: 30px;
+  .kb-row {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+  }
+
+  .key {
+    height: 28px;
+    min-width: 28px;
+    background: linear-gradient(180deg, #2a2a2e 0%, #1e1e22 40%, #18181c 100%);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7.5px;
+    color: rgba(255,255,255,0.55);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.4),
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      0 0 0 0.5px rgba(0,0,0,0.5);
+    position: relative;
+    flex-shrink: 0;
+    user-select: none;
+    padding: 0 2px;
+  }
+
+  /* Subtle top-light reflection on keys */
+  .key::before {
+    content: '';
+    position: absolute;
+    top: 1px; left: 3px; right: 3px;
+    height: 8px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, transparent 100%);
+    border-radius: 3px 3px 0 0;
+  }
+
+  .key.fn { height: 20px; font-size: 6.5px; }
+  .key.half { height: 13px; font-size: 6px; }
+
+  /* Key widths */
+  .key.w-esc { min-width: 42px; }
+  .key.w-fn { min-width: 52px; flex: 1; }
+  .key.w-power { min-width: 42px; }
+  .key.w-tab { min-width: 44px; }
+  .key.w-backslash { min-width: 44px; }
+  .key.w-caps { min-width: 54px; }
+  .key.w-return { min-width: 58px; }
+  .key.w-shift-l { min-width: 72px; }
+  .key.w-shift-r { min-width: 72px; }
+  .key.w-ctrl { min-width: 36px; }
+  .key.w-opt { min-width: 36px; }
+  .key.w-cmd { min-width: 44px; }
+  .key.w-space { flex: 1; min-width: 200px; }
+  .key.w-arrow { min-width: 28px; }
+  .key.w-backspace { min-width: 50px; }
+
+  /* Arrow cluster */
+  .arrow-cluster {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-left: auto;
+  }
+
+  .arrow-row {
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+  }
+
+  /* Power key / Touch ID */
+  .key.power {
+    background: linear-gradient(180deg, #1a1a1e 0%, #111114 100%);
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.4),
+      inset 0 0 0 1px rgba(255,255,255,0.04),
+      0 0 0 0.5px rgba(0,0,0,0.5);
+  }
+
+  /* ============ TRACKPAD ============ */
+  .trackpad {
+    width: 52%;
+    height: 100px;
     margin: 0 auto;
-    background: radial-gradient(ellipse, rgba(255,255,255,0.02) 0%, transparent 70%);
-    filter: blur(8px);
+    background: linear-gradient(180deg, #c4c4c8 0%, #bababc 50%, #b4b4b8 100%);
+    border-radius: 8px;
+    box-shadow:
+      inset 0 0 0 0.5px rgba(0,0,0,0.2),
+      inset 0 1px 3px rgba(0,0,0,0.08),
+      0 0 0 0.5px rgba(255,255,255,0.3);
+    position: relative;
   }
 
-  /* Dashboard screenshot placeholder with inline SVG fallback */
-  .dashboard-placeholder {
+  .trackpad::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 4px; right: 4px;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%);
+    border-radius: 7px 7px 0 0;
+  }
+
+  /* ============ SURFACE REFLECTION ============ */
+  .surface-reflection {
+    width: 85%;
+    height: 40px;
+    margin: 8px auto 0;
+    background: radial-gradient(ellipse at center, rgba(180,180,200,0.04) 0%, transparent 70%);
+    filter: blur(10px);
+  }
+
+  /* ============ DASHBOARD STYLES ============ */
+  .dashboard {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, #1a1209 0%, #2a1f10 50%, #1a1209 100%);
@@ -151,7 +302,6 @@
     overflow: hidden;
   }
 
-  /* Top bar */
   .db-topbar {
     display: flex;
     justify-content: space-between;
@@ -160,11 +310,7 @@
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
 
-  .db-logo {
-    font-weight: 700;
-    font-size: 14px;
-    color: #fff;
-  }
+  .db-logo { font-weight: 700; font-size: 14px; color: #fff; }
 
   .db-status {
     background: rgba(34,197,94,0.15);
@@ -179,19 +325,13 @@
 
   .db-status::before {
     content: '';
-    width: 6px;
-    height: 6px;
+    width: 6px; height: 6px;
     background: #22c55e;
     border-radius: 50%;
   }
 
-  .db-body {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-  }
+  .db-body { display: flex; flex: 1; overflow: hidden; }
 
-  /* Sidebar */
   .db-sidebar {
     width: 160px;
     padding: 16px 12px;
@@ -215,7 +355,6 @@
     border-radius: 6px;
     font-size: 11px;
     color: rgba(255,255,255,0.5);
-    cursor: pointer;
   }
 
   .db-sidebar-item.active {
@@ -223,12 +362,7 @@
     color: #e88c32;
   }
 
-  /* Main content */
-  .db-main {
-    flex: 1;
-    padding: 20px;
-    overflow: hidden;
-  }
+  .db-main { flex: 1; padding: 20px; overflow: hidden; }
 
   .db-header {
     display: flex;
@@ -237,22 +371,10 @@
     margin-bottom: 16px;
   }
 
-  .db-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #fff;
-  }
+  .db-title { font-size: 20px; font-weight: 700; color: #fff; }
+  .db-subtitle { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 2px; }
 
-  .db-subtitle {
-    font-size: 10px;
-    color: rgba(255,255,255,0.4);
-    margin-top: 2px;
-  }
-
-  .db-actions {
-    display: flex;
-    gap: 8px;
-  }
+  .db-actions { display: flex; gap: 8px; }
 
   .db-btn {
     padding: 6px 14px;
@@ -263,18 +385,9 @@
     background: transparent;
   }
 
-  .db-btn.primary {
-    background: #e88c32;
-    color: #fff;
-    border-color: #e88c32;
-  }
+  .db-btn.primary { background: #e88c32; color: #fff; border-color: #e88c32; }
 
-  /* Stats row */
-  .db-stats {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
+  .db-stats { display: flex; gap: 12px; margin-bottom: 16px; }
 
   .db-stat-card {
     flex: 1;
@@ -291,18 +404,8 @@
     letter-spacing: 0.5px;
   }
 
-  .db-stat-value {
-    font-size: 28px;
-    font-weight: 700;
-    color: #fff;
-    margin-top: 4px;
-  }
-
-  .db-stat-sub {
-    font-size: 9px;
-    color: rgba(255,255,255,0.35);
-    margin-top: 2px;
-  }
+  .db-stat-value { font-size: 28px; font-weight: 700; color: #fff; margin-top: 4px; }
+  .db-stat-sub { font-size: 9px; color: rgba(255,255,255,0.35); margin-top: 2px; }
 
   .db-stat-badge {
     display: inline-block;
@@ -314,11 +417,7 @@
     margin-top: 6px;
   }
 
-  /* Bottom panels */
-  .db-panels {
-    display: flex;
-    gap: 12px;
-  }
+  .db-panels { display: flex; gap: 12px; }
 
   .db-panel {
     flex: 1;
@@ -338,13 +437,8 @@
     justify-content: space-between;
   }
 
-  .db-panel-title span {
-    font-size: 9px;
-    color: rgba(255,255,255,0.3);
-    font-weight: 400;
-  }
+  .db-panel-title span { font-size: 9px; color: rgba(255,255,255,0.3); font-weight: 400; }
 
-  /* Source bars */
   .db-source-row {
     display: flex;
     align-items: center;
@@ -353,18 +447,8 @@
     font-size: 10px;
   }
 
-  .db-source-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .db-source-name {
-    width: 70px;
-    color: rgba(255,255,255,0.6);
-    flex-shrink: 0;
-  }
+  .db-source-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .db-source-name { width: 70px; color: rgba(255,255,255,0.6); flex-shrink: 0; }
 
   .db-source-bar {
     flex: 1;
@@ -374,19 +458,9 @@
     overflow: hidden;
   }
 
-  .db-source-fill {
-    height: 100%;
-    border-radius: 2px;
-  }
+  .db-source-fill { height: 100%; border-radius: 2px; }
+  .db-source-val { width: 24px; text-align: right; color: rgba(255,255,255,0.5); flex-shrink: 0; }
 
-  .db-source-val {
-    width: 24px;
-    text-align: right;
-    color: rgba(255,255,255,0.5);
-    flex-shrink: 0;
-  }
-
-  /* Recent calls table */
   .db-table-header {
     display: flex;
     gap: 4px;
@@ -414,27 +488,10 @@
   .db-col-dur { width: 14%; }
   .db-col-status { width: 22%; }
 
-  .db-badge {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 8px;
-  }
-
-  .db-badge.completed {
-    background: rgba(34,197,94,0.12);
-    color: #22c55e;
-  }
-
-  .db-badge.missed {
-    background: rgba(239,68,68,0.12);
-    color: #ef4444;
-  }
-
-  .db-badge.voicemail {
-    background: rgba(59,130,246,0.12);
-    color: #3b82f6;
-  }
+  .db-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 8px; }
+  .db-badge.completed { background: rgba(34,197,94,0.12); color: #22c55e; }
+  .db-badge.missed { background: rgba(239,68,68,0.12); color: #ef4444; }
+  .db-badge.voicemail { background: rgba(59,130,246,0.12); color: #3b82f6; }
 
   .db-insight {
     margin-top: 10px;
@@ -446,11 +503,7 @@
     color: #e88c32;
   }
 
-  .db-view-all {
-    color: #e88c32;
-    font-size: 9px;
-    cursor: pointer;
-  }
+  .db-view-all { color: #e88c32; font-size: 9px; }
 
   .db-sidebar-bottom {
     margin-top: auto;
@@ -458,21 +511,19 @@
     border-top: 1px solid rgba(255,255,255,0.06);
   }
 
-  .db-user {
-    font-size: 9px;
-    color: rgba(255,255,255,0.35);
-    padding: 4px 8px;
-  }
+  .db-user { font-size: 9px; color: rgba(255,255,255,0.35); padding: 4px 8px; }
 </style>
 </head>
 <body>
 
+<div class="macbook-wrapper">
 <div class="macbook">
-  <div class="screen">
-    <div class="notch"></div>
-    <div class="screen-content">
-      <!-- Fully rendered dashboard -->
-      <div class="dashboard-placeholder">
+
+  <!-- ====== LID / SCREEN ====== -->
+  <div class="lid">
+    <div class="camera"></div>
+    <div class="display">
+      <div class="dashboard">
         <div class="db-topbar">
           <div class="db-logo">Marketers Box</div>
           <div class="db-status">Active</div>
@@ -489,7 +540,7 @@
             <div class="db-sidebar-item">Settings</div>
             <div class="db-sidebar-bottom">
               <div class="db-user">demo@gmail.com</div>
-              <div style="padding: 4px 8px;"><span class="db-badge completed">Active</span></div>
+              <div style="padding:4px 8px"><span class="db-badge completed">Active</span></div>
             </div>
           </div>
           <div class="db-main">
@@ -518,37 +569,11 @@
             <div class="db-panels">
               <div class="db-panel">
                 <div class="db-panel-title">Calls by Source <span>March 2026</span></div>
-                <div class="db-source-row">
-                  <div class="db-source-dot" style="background:#e85832"></div>
-                  <div class="db-source-name">Truck Wrap</div>
-                  <div class="db-source-bar"><div class="db-source-fill" style="width:100%;background:#e85832"></div></div>
-                  <div class="db-source-val">89</div>
-                </div>
-                <div class="db-source-row">
-                  <div class="db-source-dot" style="background:#3b82f6"></div>
-                  <div class="db-source-name">Google Ads</div>
-                  <div class="db-source-bar"><div class="db-source-fill" style="width:80%;background:#3b82f6"></div></div>
-                  <div class="db-source-val">71</div>
-                </div>
-                <div class="db-source-row">
-                  <div class="db-source-dot" style="background:#22c55e"></div>
-                  <div class="db-source-name">Yard Sign</div>
-                  <div class="db-source-bar"><div class="db-source-fill" style="width:43%;background:#22c55e"></div></div>
-                  <div class="db-source-val">38</div>
-                </div>
-                <div class="db-source-row">
-                  <div class="db-source-dot" style="background:#8b5cf6"></div>
-                  <div class="db-source-name">Facebook</div>
-                  <div class="db-source-bar"><div class="db-source-fill" style="width:26%;background:#8b5cf6"></div></div>
-                  <div class="db-source-val">23</div>
-                </div>
-                <div class="db-source-row">
-                  <div class="db-source-dot" style="background:#6b7280"></div>
-                  <div class="db-source-name">Flyer</div>
-                  <div class="db-source-bar"><div class="db-source-fill" style="width:16%;background:#6b7280"></div></div>
-                  <div class="db-source-val">14</div>
-                </div>
-                <div class="db-insight">Top channel: Truck Wrap &mdash; 47.8% of all calls</div>
+                <div class="db-source-row"><div class="db-source-dot" style="background:#e85832"></div><div class="db-source-name">Truck Wrap</div><div class="db-source-bar"><div class="db-source-fill" style="width:100%;background:#e85832"></div></div><div class="db-source-val">89</div></div>
+                <div class="db-source-row"><div class="db-source-dot" style="background:#3b82f6"></div><div class="db-source-name">Google Ads</div><div class="db-source-bar"><div class="db-source-fill" style="width:80%;background:#3b82f6"></div></div><div class="db-source-val">71</div></div>
+                <div class="db-source-row"><div class="db-source-dot" style="background:#22c55e"></div><div class="db-source-name">Yard Sign</div><div class="db-source-bar"><div class="db-source-fill" style="width:43%;background:#22c55e"></div></div><div class="db-source-val">38</div></div>
+                <div class="db-source-row"><div class="db-source-dot" style="background:#8b5cf6"></div><div class="db-source-name">Facebook</div><div class="db-source-bar"><div class="db-source-fill" style="width:26%;background:#8b5cf6"></div></div><div class="db-source-val">23</div></div>
+                <div class="db-source-row"><div class="db-source-dot" style="background:#6b7280"></div><div class="db-source-name">Flyer</div><div class="db-source-bar"><div class="db-source-fill" style="width:16%;background:#6b7280"></div></div><div class="db-source-val">14</div></div>
               </div>
               <div class="db-panel">
                 <div class="db-panel-title">Recent Calls <span class="db-view-all">View all &rarr;</span></div>
@@ -559,59 +584,142 @@
                   <div class="db-col-dur">Duration</div>
                   <div class="db-col-status">Status</div>
                 </div>
-                <div class="db-table-row">
-                  <div class="db-col-time">Today, 2:41 PM</div>
-                  <div class="db-col-from">(805) 412-7733</div>
-                  <div class="db-col-source">Truck Wrap</div>
-                  <div class="db-col-dur">3:07</div>
-                  <div class="db-col-status"><span class="db-badge completed">Completed</span></div>
-                </div>
-                <div class="db-table-row">
-                  <div class="db-col-time">Today, 1:18 PM</div>
-                  <div class="db-col-from">(323) 881-8042</div>
-                  <div class="db-col-source">Google Ads</div>
-                  <div class="db-col-dur">0:00</div>
-                  <div class="db-col-status"><span class="db-badge missed">Missed</span></div>
-                </div>
-                <div class="db-table-row">
-                  <div class="db-col-time">Today, 11:55 AM</div>
-                  <div class="db-col-from">(818) 554-9281</div>
-                  <div class="db-col-source">Truck Wrap</div>
-                  <div class="db-col-dur">5:12</div>
-                  <div class="db-col-status"><span class="db-badge completed">Completed</span></div>
-                </div>
-                <div class="db-table-row">
-                  <div class="db-col-time">Today, 10:03 AM</div>
-                  <div class="db-col-from">(661) 200-7750</div>
-                  <div class="db-col-source">Yard Sign</div>
-                  <div class="db-col-dur">1:34</div>
-                  <div class="db-col-status"><span class="db-badge voicemail">Voicemail</span></div>
-                </div>
-                <div class="db-table-row">
-                  <div class="db-col-time">Yesterday, 4:47</div>
-                  <div class="db-col-from">(714) 398-6613</div>
-                  <div class="db-col-source">Google Ads</div>
-                  <div class="db-col-dur">7:21</div>
-                  <div class="db-col-status"><span class="db-badge completed">Completed</span></div>
-                </div>
-                <div class="db-table-row">
-                  <div class="db-col-time">Yesterday, 2:12</div>
-                  <div class="db-col-from">(805) 774-3311</div>
-                  <div class="db-col-source">Truck Wrap</div>
-                  <div class="db-col-dur">3:48</div>
-                  <div class="db-col-status"><span class="db-badge completed">Completed</span></div>
-                </div>
+                <div class="db-table-row"><div class="db-col-time">Today, 2:41 PM</div><div class="db-col-from">(805) 412-7733</div><div class="db-col-source">Truck Wrap</div><div class="db-col-dur">3:07</div><div class="db-col-status"><span class="db-badge completed">Completed</span></div></div>
+                <div class="db-table-row"><div class="db-col-time">Today, 1:18 PM</div><div class="db-col-from">(323) 881-8042</div><div class="db-col-source">Google Ads</div><div class="db-col-dur">0:00</div><div class="db-col-status"><span class="db-badge missed">Missed</span></div></div>
+                <div class="db-table-row"><div class="db-col-time">Today, 11:55 AM</div><div class="db-col-from">(818) 554-9281</div><div class="db-col-source">Truck Wrap</div><div class="db-col-dur">5:12</div><div class="db-col-status"><span class="db-badge completed">Completed</span></div></div>
+                <div class="db-table-row"><div class="db-col-time">Today, 10:03 AM</div><div class="db-col-from">(661) 200-7750</div><div class="db-col-source">Yard Sign</div><div class="db-col-dur">1:34</div><div class="db-col-status"><span class="db-badge completed">Completed</span></div></div>
+                <div class="db-table-row"><div class="db-col-time">Yesterday, 4:47</div><div class="db-col-from">(714) 398-6613</div><div class="db-col-source">Google Ads</div><div class="db-col-dur">7:21</div><div class="db-col-status"><span class="db-badge completed">Completed</span></div></div>
+                <div class="db-table-row"><div class="db-col-time">Yesterday, 2:12</div><div class="db-col-from">(805) 774-3311</div><div class="db-col-source">Truck Wrap</div><div class="db-col-dur">3:48</div><div class="db-col-status"><span class="db-badge completed">Completed</span></div></div>
               </div>
             </div>
+            <div class="db-insight" style="margin-top:12px">Top channel: Truck Wrap &mdash; 47.8% of all calls</div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="bottom-bar"></div>
-  <div class="hinge"></div>
-  <div class="base"></div>
-  <div class="reflection"></div>
+
+  <!-- ====== HINGE ====== -->
+  <div class="hinge-area"></div>
+
+  <!-- ====== BASE WITH KEYBOARD ====== -->
+  <div class="base">
+    <div class="keyboard">
+
+      <!-- Function row -->
+      <div class="kb-row">
+        <div class="key fn w-esc">esc</div>
+        <div class="key fn w-fn">F1</div>
+        <div class="key fn w-fn">F2</div>
+        <div class="key fn w-fn">F3</div>
+        <div class="key fn w-fn">F4</div>
+        <div class="key fn w-fn">F5</div>
+        <div class="key fn w-fn">F6</div>
+        <div class="key fn w-fn">F7</div>
+        <div class="key fn w-fn">F8</div>
+        <div class="key fn w-fn">F9</div>
+        <div class="key fn w-fn">F10</div>
+        <div class="key fn w-fn">F11</div>
+        <div class="key fn w-fn">F12</div>
+        <div class="key fn power w-power">&#x23FB;</div>
+      </div>
+
+      <!-- Number row -->
+      <div class="kb-row">
+        <div class="key">`</div>
+        <div class="key">1</div>
+        <div class="key">2</div>
+        <div class="key">3</div>
+        <div class="key">4</div>
+        <div class="key">5</div>
+        <div class="key">6</div>
+        <div class="key">7</div>
+        <div class="key">8</div>
+        <div class="key">9</div>
+        <div class="key">0</div>
+        <div class="key">-</div>
+        <div class="key">=</div>
+        <div class="key w-backspace">delete</div>
+      </div>
+
+      <!-- QWERTY row -->
+      <div class="kb-row">
+        <div class="key w-tab">tab</div>
+        <div class="key">Q</div>
+        <div class="key">W</div>
+        <div class="key">E</div>
+        <div class="key">R</div>
+        <div class="key">T</div>
+        <div class="key">Y</div>
+        <div class="key">U</div>
+        <div class="key">I</div>
+        <div class="key">O</div>
+        <div class="key">P</div>
+        <div class="key">[</div>
+        <div class="key">]</div>
+        <div class="key w-backslash">\</div>
+      </div>
+
+      <!-- Home row -->
+      <div class="kb-row">
+        <div class="key w-caps">caps lock</div>
+        <div class="key">A</div>
+        <div class="key">S</div>
+        <div class="key">D</div>
+        <div class="key">F</div>
+        <div class="key">G</div>
+        <div class="key">H</div>
+        <div class="key">J</div>
+        <div class="key">K</div>
+        <div class="key">L</div>
+        <div class="key">;</div>
+        <div class="key">'</div>
+        <div class="key w-return">return</div>
+      </div>
+
+      <!-- Shift row -->
+      <div class="kb-row">
+        <div class="key w-shift-l">shift</div>
+        <div class="key">Z</div>
+        <div class="key">X</div>
+        <div class="key">C</div>
+        <div class="key">V</div>
+        <div class="key">B</div>
+        <div class="key">N</div>
+        <div class="key">M</div>
+        <div class="key">,</div>
+        <div class="key">.</div>
+        <div class="key">/</div>
+        <div class="key w-shift-r">shift</div>
+      </div>
+
+      <!-- Bottom row -->
+      <div class="kb-row">
+        <div class="key w-ctrl">fn</div>
+        <div class="key w-ctrl">&#x2303;</div>
+        <div class="key w-opt">&#x2325;</div>
+        <div class="key w-cmd">&#x2318;</div>
+        <div class="key w-space"></div>
+        <div class="key w-cmd">&#x2318;</div>
+        <div class="key w-opt">&#x2325;</div>
+        <div class="key w-arrow half">&larr;</div>
+        <div style="display:flex;flex-direction:column;gap:1px">
+          <div class="key w-arrow half">&uarr;</div>
+          <div class="key w-arrow half">&darr;</div>
+        </div>
+        <div class="key w-arrow half">&rarr;</div>
+      </div>
+
+    </div>
+
+    <!-- Trackpad -->
+    <div class="trackpad"></div>
+  </div>
+
+</div>
+
+<!-- Surface reflection -->
+<div class="surface-reflection"></div>
 </div>
 
 </body>
