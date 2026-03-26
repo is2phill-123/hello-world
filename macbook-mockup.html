@@ -138,13 +138,12 @@
     border-radius: 0 0 14px 14px;
     padding: 8px 16px 10px;
     position: relative;
-    /* Perspective tilt: looking down at keyboard from seated position */
-    transform: perspective(1100px) rotateX(8deg);
+    transform: perspective(2000px) rotateX(3deg);
     transform-origin: top center;
     box-shadow:
-      0 8px 30px rgba(0,0,0,0.4),
-      0 3px 10px rgba(0,0,0,0.25),
-      inset 0 -1px 0 rgba(0,0,0,0.12),
+      0 8px 30px rgba(0,0,0,0.35),
+      0 3px 10px rgba(0,0,0,0.2),
+      inset 0 -1px 0 rgba(0,0,0,0.1),
       inset 0 1px 0 rgba(255,255,255,0.25);
   }
 
@@ -424,6 +423,8 @@
     border-radius: 10px;
     padding: 14px 16px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .db-panel-title {
@@ -491,7 +492,8 @@
   .db-badge.missed { background: rgba(239,68,68,0.12); color: #ef4444; }
 
   .db-insight {
-    margin-top: 10px;
+    margin-top: auto;
+    padding-top: 10px;
     background: rgba(232,140,50,0.1);
     border: 1px solid rgba(232,140,50,0.2);
     border-radius: 6px;
