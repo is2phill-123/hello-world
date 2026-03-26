@@ -21,12 +21,6 @@
   .macbook-wrapper {
     width: 880px;
     max-width: 96vw;
-    perspective: 2400px;
-  }
-
-  .macbook-inner {
-    transform: rotateX(2deg);
-    transform-origin: center 40%;
   }
 
   /* ============ SCREEN / LID ============ */
@@ -115,18 +109,20 @@
 
   /* ============ HINGE ============ */
   .hinge-area {
-    height: 6px;
+    height: 4px;
     background: linear-gradient(
       to bottom,
-      #606064 0%,
-      #a0a0a4 25%,
-      #c8c8cc 50%,
-      #a0a0a4 75%,
-      #707074 100%
+      #707074 0%,
+      #c0c0c4 40%,
+      #d4d4d8 50%,
+      #a8a8ac 70%,
+      #808084 100%
     );
     box-shadow:
-      0 1px 2px rgba(0,0,0,0.25),
-      inset 0 1px 0 rgba(255,255,255,0.35);
+      0 2px 4px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.4);
+    position: relative;
+    z-index: 2;
   }
 
   /* ============ KEYBOARD BASE ============ */
@@ -142,12 +138,13 @@
       #b4b4b8 100%
     );
     border-radius: 0 0 14px 14px;
-    padding: 8px 16px 10px;
+    padding: 12px 20px 14px;
     position: relative;
-    /* no individual perspective - applied to whole laptop via .macbook-inner */
+    transform: perspective(500px) rotateX(28deg);
+    transform-origin: top center;
     box-shadow:
-      0 8px 30px rgba(0,0,0,0.35),
-      0 3px 10px rgba(0,0,0,0.2),
+      0 12px 40px rgba(0,0,0,0.5),
+      0 4px 12px rgba(0,0,0,0.3),
       inset 0 -1px 0 rgba(0,0,0,0.1),
       inset 0 1px 0 rgba(255,255,255,0.25);
   }
@@ -285,11 +282,11 @@
 
   /* ============ SURFACE REFLECTION ============ */
   .surface-reflection {
-    width: 70%;
-    height: 20px;
-    margin: 4px auto 0;
-    background: radial-gradient(ellipse at center, rgba(180,180,200,0.03) 0%, transparent 70%);
-    filter: blur(6px);
+    width: 90%;
+    height: 12px;
+    margin: 2px auto 0;
+    background: radial-gradient(ellipse at center, rgba(200,200,220,0.06) 0%, transparent 70%);
+    filter: blur(4px);
   }
 
   /* ============ DASHBOARD STYLES ============ */
@@ -520,7 +517,6 @@
 <body>
 
 <div class="macbook-wrapper">
-<div class="macbook-inner">
 
   <!-- ====== LID / SCREEN ====== -->
   <div class="lid">
@@ -722,7 +718,6 @@
   <!-- Surface reflection -->
   <div class="surface-reflection"></div>
 
-</div>
 </div>
 
 </body>
