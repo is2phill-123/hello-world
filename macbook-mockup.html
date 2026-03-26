@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MacBook Mockup - Marketers Box</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, #0a0a12 0%, #111128 40%, #0d1b2a 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    padding: 60px 20px;
+    overflow-x: hidden;
+  }
+
+  .macbook-wrapper {
+    width: 880px;
+    max-width: 96vw;
+  }
+
+  /* ============ SCREEN / LID ============ */
+  .lid {
+    background: linear-gradient(
+      180deg,
+      #d6d6da 0%,
+      #c8c8cc 2%,
+      #bababc 5%,
+      #acacb0 50%,
+      #b4b4b8 96%,
+      #c4c4c8 98%,
+      #909094 100%
+    );
+    border-radius: 14px 14px 0 0;
+    padding: 12px 12px 0 12px;
+    position: relative;
+    box-shadow:
+      0 -1px 3px rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.6),
+      inset 0 -1px 0 rgba(0,0,0,0.08);
+  }
+
+  /* Chrome edge highlight on lid */
+  .lid::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0) 5%,
+      rgba(255,255,255,0.6) 30%,
+      rgba(255,255,255,0.85) 50%,
+      rgba(255,255,255,0.6) 70%,
+      rgba(255,255,255,0) 95%
+    );
+    border-radius: 14px 14px 0 0;
+  }
+
+  /* Camera */
+  .camera {
+    width: 7px;
+    height: 7px;
+    background: radial-gradient(circle, #2a2a2e 30%, #1a1a1e 60%, #0a0a0e 100%);
+    border-radius: 50%;
+    margin: 0 auto 8px;
+    box-shadow: 0 0 0 1.5px #8a8a8e, 0 0 2px rgba(0,0,0,0.3);
+    position: relative;
+  }
+
+  .camera::after {
+    content: '';
+    width: 2.5px; height: 2.5px;
+    background: radial-gradient(circle, #1a3a2a 0%, #0a1a10 100%);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Display area */
+  .display {
+    background: #000;
+    border-radius: 3px 3px 0 0;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    position: relative;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.5);
+  }
+
+  /* Screen glare */
+  .display::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(
+      125deg,
+      rgba(255,255,255,0.035) 0%,
+      rgba(255,255,255,0.008) 30%,
+      transparent 50%,
+      transparent 100%
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* ============ HINGE ============ */
+  .hinge-area {
+    height: 6px;
+    background: linear-gradient(
+      to bottom,
+      #606064 0%,
+      #a0a0a4 25%,
+      #c8c8cc 50%,
+      #a0a0a4 75%,
+      #707074 100%
+    );
+    box-shadow:
+      0 1px 2px rgba(0,0,0,0.25),
+      inset 0 1px 0 rgba(255,255,255,0.35);
+  }
+
+  /* ============ KEYBOARD BASE ============ */
+  .base {
+    background: linear-gradient(
+      180deg,
+      #c4c4c8 0%,
+      #d0d0d4 4%,
+      #d6d6da 12%,
+      #d4d4d8 50%,
+      #cececf 88%,
+      #c2c2c6 96%,
+      #b4b4b8 100%
+    );
+    border-radius: 0 0 14px 14px;
+    padding: 10px 18px 12px;
+    position: relative;
+    box-shadow:
+      0 6px 25px rgba(0,0,0,0.35),
+      0 2px 8px rgba(0,0,0,0.2),
+      inset 0 -1px 0 rgba(0,0,0,0.12),
+      inset 0 1px 0 rgba(255,255,255,0.25);
+  }
+
+  /* Chrome edge on base bottom */
+  .base::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 40px; right: 40px;
+    height: 2px;
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.45) 30%,
+      rgba(255,255,255,0.65) 50%,
+      rgba(255,255,255,0.45) 70%,
+      rgba(255,255,255,0) 100%
+    );
+    border-radius: 0 0 14px 14px;
+  }
+
+  /* ============ KEYBOARD ============ */
+  .keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 10px;
+  }
+
+  .kb-row {
+    display: flex;
+    gap: 2px;
+    width: 100%;
+  }
+
+  .key {
+    height: 26px;
+    flex: 1;
+    min-width: 0;
+    background: linear-gradient(180deg, #2c2c30 0%, #202024 40%, #1a1a1e 100%);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7px;
+    color: rgba(255,255,255,0.5);
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    box-shadow:
+      0 0.5px 1px rgba(0,0,0,0.35),
+      inset 0 0.5px 0 rgba(255,255,255,0.06),
+      0 0 0 0.5px rgba(0,0,0,0.3);
+    position: relative;
+    user-select: none;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  /* Subtle top-light reflection on keys */
+  .key::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 2px; right: 2px;
+    height: 7px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 100%);
+    border-radius: 2px 2px 0 0;
+    pointer-events: none;
+  }
+
+  /* Function row keys - thinner */
+  .key.fn { height: 18px; font-size: 6px; }
+
+  /* Arrow half-height keys */
+  .key.half { height: 12px; font-size: 5.5px; }
+
+  /* Wider keys use flex multipliers */
+  .key.w-esc     { flex: 1.15; }
+  .key.w-fn      { flex: 1; }
+  .key.w-power   { flex: 1.15; }
+  .key.w-back    { flex: 1.55; }
+  .key.w-tab     { flex: 1.55; }
+  .key.w-bslash  { flex: 1.15; }
+  .key.w-caps    { flex: 1.85; }
+  .key.w-return  { flex: 1.85; }
+  .key.w-shift-l { flex: 2.4; }
+  .key.w-shift-r { flex: 2.4; }
+  .key.w-fn-mod  { flex: 1; }
+  .key.w-ctrl    { flex: 1.1; }
+  .key.w-opt     { flex: 1.25; }
+  .key.w-cmd     { flex: 1.5; }
+  .key.w-space   { flex: 6.2; }
+  .key.w-arrow   { flex: 1; }
+
+  /* Arrow stacked container */
+  .arrow-updown {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Power key / Touch ID */
+  .key.power {
+    background: linear-gradient(180deg, #1c1c20 0%, #131316 100%);
+    box-shadow:
+      0 0.5px 1px rgba(0,0,0,0.4),
+      inset 0 0 0 0.5px rgba(255,255,255,0.04),
+      0 0 0 0.5px rgba(0,0,0,0.4);
+  }
+
+  /* ============ TRACKPAD ============ */
+  .trackpad {
+    width: 46%;
+    aspect-ratio: 1.65 / 1;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #c6c6ca 0%, #bebec2 50%, #b8b8bc 100%);
+    border-radius: 7px;
+    box-shadow:
+      inset 0 0 0 0.5px rgba(0,0,0,0.18),
+      inset 0 1px 2px rgba(0,0,0,0.06),
+      0 0 0 0.5px rgba(255,255,255,0.25);
+    position: relative;
+  }
+
+  .trackpad::after {
+    content: '';
+    position: absolute;
+    top: 2px; left: 4px; right: 4px;
+    height: 35%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+    border-radius: 6px 6px 0 0;
+    pointer-events: none;
+  }
+
+  /* ============ SURFACE REFLECTION ============ */
+  .surface-reflection {
+    width: 80%;
+    height: 30px;
+    margin: 6px auto 0;
+    background: radial-gradient(ellipse at center, rgba(180,180,200,0.035) 0%, transparent 70%);
+    filter: blur(8px);
+  }
+
+  /* ============ DASHBOARD STYLES ============ */
+  .dashboard {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a1209 0%, #2a1f10 50%, #1a1209 100%);
+    display: flex;
+    flex-direction: column;
+    color: #e8d5b0;
+    font-size: 11px;
+    overflow: hidden;
+  }
+
+  .db-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .db-logo { font-weight: 700; font-size: 14px; color: #fff; }
+
+  .db-status {
+    background: rgba(34,197,94,0.15);
+    color: #22c55e;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .db-status::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+  }
+
+  .db-body { display: flex; flex: 1; overflow: hidden; }
+
+  .db-sidebar {
+    width: 160px;
+    padding: 16px 12px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .db-sidebar-label {
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 8px 4px;
+  }
+
+  .db-sidebar-item {
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .db-sidebar-item.active {
+    background: rgba(232,140,50,0.2);
+    color: #e88c32;
+  }
+
+  .db-main { flex: 1; padding: 20px; overflow: hidden; }
+
+  .db-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .db-title { font-size: 20px; font-weight: 700; color: #fff; }
+  .db-subtitle { font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+  .db-actions { display: flex; gap: 8px; }
+
+  .db-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+    background: transparent;
+  }
+
+  .db-btn.primary { background: #e88c32; color: #fff; border-color: #e88c32; }
+
+  .db-stats { display: flex; gap: 12px; margin-bottom: 16px; }
+
+  .db-stat-card {
+    flex: 1;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .db-stat-label {
+    font-size: 9px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .db-stat-value { font-size: 28px; font-weight: 700; color: #fff; margin-top: 4px; }
+  .db-stat-sub { font-size: 9px; color: rgba(255,255,255,0.35); margin-top: 2px; }
+
+  .db-stat-badge {
+    display: inline-block;
+    background: rgba(34,197,94,0.12);
+    color: #22c55e;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 9px;
+    margin-top: 6px;
+  }
+
+  .db-panels { display: flex; gap: 12px; }
+
+  .db-panel {
+    flex: 1;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 14px 16px;
+    overflow: hidden;
+  }
+
+  .db-panel-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .db-panel-title span { font-size: 9px; color: rgba(255,255,255,0.3); font-weight: 400; }
+
+  .db-source-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 10px;
+  }
+
+  .db-source-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .db-source-name { width: 70px; color: rgba(255,255,255,0.6); flex-shrink: 0; }
+
+  .db-source-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .db-source-fill { height: 100%; border-radius: 2px; }
+  .db-source-val { width: 24px; text-align: right; color: rgba(255,255,255,0.5); flex-shrink: 0; }
+
+  .db-table-header {
+    display: flex;
+    gap: 4px;
+    font-size: 9px;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    margin-bottom: 6px;
+  }
+
+  .db-table-row {
+    display: flex;
+    gap: 4px;
+    font-size: 9px;
+    color: rgba(255,255,255,0.5);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+    align-items: center;
+  }
+
+  .db-col-time { width: 22%; }
+  .db-col-from { width: 22%; }
+  .db-col-source { width: 20%; }
+  .db-col-dur { width: 14%; }
+  .db-col-status { width: 22%; }
+
+  .db-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 8px; }
+  .db-badge.completed { background: rgba(34,197,94,0.12); color: #22c55e; }
+  .db-badge.missed { background: rgba(239,68,68,0.12); color: #ef4444; }
+
+  .db-insight {
+    margin-top: 10px;
+    background: rgba(232,140,50,0.1);
+    border: 1px solid rgba(232,140,50,0.2);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 9px;
+    color: #e88c32;
+  }
+
+  .db-view-all { color: #e88c32; font-size: 9px; }
+
+  .db-sidebar-bottom {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .db-user { font-size: 9px; color: rgba(255,255,255,0.35); padding: 4px 8px; }
+</style>
+</head>
+<body>
+
+<div class="macbook-wrapper">
+
+  <!-- ====== LID / SCREEN ====== -->
+  <div class="lid">
+    <div class="camera"></div>
+    <div class="display">
+      <div class="dashboard">
+        <div class="db-topbar">
+          <div class="db-logo">Marketers Box</div>
+          <div class="db-status">Active</div>
+        </div>
+        <div class="db-body">
+          <div class="db-sidebar">
+            <div class="db-sidebar-label">Overview</div>
+            <div class="db-sidebar-item active">Dashboard</div>
+            <div class="db-sidebar-label">Tracking</div>
+            <div class="db-sidebar-item">Numbers</div>
+            <div class="db-sidebar-item">Call Logs</div>
+            <div class="db-sidebar-label">Account</div>
+            <div class="db-sidebar-item">Billing</div>
+            <div class="db-sidebar-item">Settings</div>
+            <div class="db-sidebar-bottom">
+              <div class="db-user">demo@gmail.com</div>
+              <div style="padding:4px 8px"><span class="db-badge completed">Active</span></div>
+            </div>
+          </div>
+          <div class="db-main">
+            <div class="db-header">
+              <div>
+                <div class="db-title">Dashboard</div>
+                <div class="db-subtitle">Call tracking overview &middot; March 2026</div>
+              </div>
+              <div class="db-actions">
+                <div class="db-btn primary">+ Add number</div>
+                <div class="db-btn">View all calls</div>
+              </div>
+            </div>
+            <div class="db-stats">
+              <div class="db-stat-card">
+                <div class="db-stat-label">Active Numbers</div>
+                <div class="db-stat-value">3</div>
+                <div class="db-stat-sub">Truck Wrap &middot; Google Ads &middot; Yard Sign</div>
+              </div>
+              <div class="db-stat-card">
+                <div class="db-stat-label">Calls This Month</div>
+                <div class="db-stat-value">186</div>
+                <div class="db-stat-badge">&uarr; 12% vs last month</div>
+              </div>
+            </div>
+            <div class="db-panels">
+              <div class="db-panel">
+                <div class="db-panel-title">Calls by Source <span>March 2026</span></div>
+                <div class="db-source-row"><div class="db-source-dot" style="background:#e85832"></div><div class="db-source-name">Truck Wrap</div><div class="db-source-bar"><div class="db-source-fill" style="width:100%;background:#e85832"></div></div><div class="db-source-val">89</div></div>
+                <div class="db-source-row"><div class="db-source-dot" style="background:#3b82f6"></div><div class="db-source-name">Google Ads</div><div class="db-source-bar"><div class="db-source-fill" style="width:80%;background:#3b82f6"></div></div><div class="db-source-val">71</div></div>
+                <div class="db-source-row"><div class="db-source-dot" style="background:#22c55e"></div><div class="db-source-name">Yard Sign</div><div class="db-source-bar"><div class="db-source-fill" style="width:43%;background:#22c55e"></div></div><div class="db-source-val">38</div></div>
+                <div class="db-source-row"><div class="db-source-dot" style="background:#8b5cf6"></div><div class="db-source-name">Facebook</div><div class="db-source-bar"><div class="db-source-fill" style="width:26%;background:#8b5cf6"></div></div><div class="db-source-val">23</div></div>
+                <div class="db-source-row"><div class="db-source-dot" style="background:#6b7280"></div><div class="db-source-name">Flyer</div><div class="db-source-bar"><div class="db-source-fill" style="width:16%;background:#6b7280"></div></div><div class="db-source-val">14</div></div>
+                <div class="db-insight">Top channel: Truck Wrap &mdash; 47.8% of all calls</div>
+              </div>
+              <div class="db-panel">
+                <div class="db-panel-title">Recent Calls <span class="db-view-all">View all &rarr;</span></div>
+                <div class="db-table-header">
+                  <div class="db-col-time">Time</div>
+                  <div class="db-col-from">From</div>
+                  <div class="db-col-source">Source</div>
+                  <div class="db-col-dur">Duration</div>
+                  <div class="db-col-status">Status</div>
+                </div>
+                <div class="db-table-row"><div class="db-col-time">Today, 2:41 PM</div><div class="db-col-from">(805) 412-7733</div><div class="db-col-source">Truck Wrap</div><div class="db-col-dur">3:07</div><div class="db-col-status"><span class="db-badge completed">Completed</span></div></div>
+                <div class="db-table-row"><div class="db-col-time">Today, 1:18 PM</div><div class="db-col-from">(323) 881-8042</div><div class="db-col-source">Google Ads</div><div class="db-col-dur">0:00</div><div class="db-col-status"><span class="db-badge missed">Missed</span></div></div>
+                <div class="db-table-row"><div class="db-col-time">Today, 11:55 AM</div><div class="db-col-from">(818) 554-9281</div><div class="db-col-source">Truck Wrap</div><div class="db-col-dur">5:12</div><div class="db-col-status"><span class="db-badge completed">Completed</span></div></div>
+                <div class="db-table-row"><div class="db-col-time">Today, 10:03 AM</div><div class="db-col-from">(661) 200-7750</div><div class="db-col-source">Yard Sign</div><div class="db-col-dur">1:34</div><div class="db-col-status"><span class="db-badge completed">Completed</span></div></div>
+                <div class="db-table-row"><div class="db-col-time">Yesterday, 4:47</div><div class="db-col-from">(714) 398-6613</div><div class="db-col-source">Google Ads</div><div class="db-col-dur">7:21</div><div class="db-col-status"><span class="db-badge completed">Completed</span></div></div>
+                <div class="db-table-row"><div class="db-col-time">Yesterday, 2:12</div><div class="db-col-from">(805) 774-3311</div><div class="db-col-source">Truck Wrap</div><div class="db-col-dur">3:48</div><div class="db-col-status"><span class="db-badge completed">Completed</span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== HINGE ====== -->
+  <div class="hinge-area"></div>
+
+  <!-- ====== BASE WITH KEYBOARD ====== -->
+  <div class="base">
+    <div class="keyboard">
+
+      <!-- Function row -->
+      <div class="kb-row">
+        <div class="key fn w-esc">esc</div>
+        <div class="key fn w-fn">F1</div>
+        <div class="key fn w-fn">F2</div>
+        <div class="key fn w-fn">F3</div>
+        <div class="key fn w-fn">F4</div>
+        <div class="key fn w-fn">F5</div>
+        <div class="key fn w-fn">F6</div>
+        <div class="key fn w-fn">F7</div>
+        <div class="key fn w-fn">F8</div>
+        <div class="key fn w-fn">F9</div>
+        <div class="key fn w-fn">F10</div>
+        <div class="key fn w-fn">F11</div>
+        <div class="key fn w-fn">F12</div>
+        <div class="key fn power w-power">&#x23FB;</div>
+      </div>
+
+      <!-- Number row -->
+      <div class="kb-row">
+        <div class="key">`</div>
+        <div class="key">1</div>
+        <div class="key">2</div>
+        <div class="key">3</div>
+        <div class="key">4</div>
+        <div class="key">5</div>
+        <div class="key">6</div>
+        <div class="key">7</div>
+        <div class="key">8</div>
+        <div class="key">9</div>
+        <div class="key">0</div>
+        <div class="key">-</div>
+        <div class="key">=</div>
+        <div class="key w-back">delete</div>
+      </div>
+
+      <!-- QWERTY row -->
+      <div class="kb-row">
+        <div class="key w-tab">tab</div>
+        <div class="key">Q</div>
+        <div class="key">W</div>
+        <div class="key">E</div>
+        <div class="key">R</div>
+        <div class="key">T</div>
+        <div class="key">Y</div>
+        <div class="key">U</div>
+        <div class="key">I</div>
+        <div class="key">O</div>
+        <div class="key">P</div>
+        <div class="key">[</div>
+        <div class="key">]</div>
+        <div class="key w-bslash">\</div>
+      </div>
+
+      <!-- Home row -->
+      <div class="kb-row">
+        <div class="key w-caps">caps lock</div>
+        <div class="key">A</div>
+        <div class="key">S</div>
+        <div class="key">D</div>
+        <div class="key">F</div>
+        <div class="key">G</div>
+        <div class="key">H</div>
+        <div class="key">J</div>
+        <div class="key">K</div>
+        <div class="key">L</div>
+        <div class="key">;</div>
+        <div class="key">'</div>
+        <div class="key w-return">return</div>
+      </div>
+
+      <!-- Shift row -->
+      <div class="kb-row">
+        <div class="key w-shift-l">shift</div>
+        <div class="key">Z</div>
+        <div class="key">X</div>
+        <div class="key">C</div>
+        <div class="key">V</div>
+        <div class="key">B</div>
+        <div class="key">N</div>
+        <div class="key">M</div>
+        <div class="key">,</div>
+        <div class="key">.</div>
+        <div class="key">/</div>
+        <div class="key w-shift-r">shift</div>
+      </div>
+
+      <!-- Bottom row -->
+      <div class="kb-row">
+        <div class="key w-fn-mod">fn</div>
+        <div class="key w-ctrl">&#x2303;</div>
+        <div class="key w-opt">&#x2325;</div>
+        <div class="key w-cmd">&#x2318;</div>
+        <div class="key w-space"></div>
+        <div class="key w-cmd">&#x2318;</div>
+        <div class="key w-opt">&#x2325;</div>
+        <div class="key w-arrow half">&larr;</div>
+        <div class="arrow-updown">
+          <div class="key w-arrow half">&uarr;</div>
+          <div class="key w-arrow half">&darr;</div>
+        </div>
+        <div class="key w-arrow half">&rarr;</div>
+      </div>
+
+    </div>
+
+    <!-- Trackpad -->
+    <div class="trackpad"></div>
+  </div>
+
+  <!-- Surface reflection -->
+  <div class="surface-reflection"></div>
+
+</div>
+
+</body>
+</html>
